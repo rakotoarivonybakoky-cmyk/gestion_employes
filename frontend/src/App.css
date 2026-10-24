@@ -1153,13 +1153,14 @@ td strong {
   font-size: 14px;
 }
 
+
 @media (max-width: 1200px) {
   .form-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .dashboard-grid {
@@ -1188,19 +1189,13 @@ td strong {
     padding: 22px 20px 35px;
   }
 
-  .page-title-row {
-    align-items: flex-start;
-    gap: 15px;
-  }
-
   .form-grid,
   .form-grid.two {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .table-top {
     align-items: flex-start;
-    gap: 15px;
     flex-direction: column;
   }
 
@@ -1209,80 +1204,159 @@ td strong {
   }
 }
 
+/* HAMBURGER */
+.hamburger-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: 1px solid #e1e6ee;
+  border-radius: 9px;
+  background: #fff;
+  color: #17243a;
+  cursor: pointer;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .sidebar {
-    width: 70px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 255px;
+    max-width: 85vw;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    visibility: hidden;
+    pointer-events: none;
+    box-shadow: none;
+    z-index: 100;
   }
 
-  .brand {
-    padding: 0;
-    justify-content: center;
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+    box-shadow: 8px 0 30px rgba(15, 23, 42, 0.18);
   }
 
-  .brand > div:last-child,
-  .sidebar-section-title,
-  .menu-item span,
-  .sidebar-bottom > div:last-child {
-    display: none;
+  .sidebar .brand {
+    height: 92px;
+    padding: 0 22px;
+    justify-content: flex-start;
   }
 
-  .menu {
-    padding: 10px;
+  .sidebar .brand > div:last-child,
+  .sidebar .sidebar-section-title,
+  .sidebar .menu-item span,
+  .sidebar .sidebar-bottom > div:last-child {
+    display: block;
   }
 
-  .menu-item {
-    justify-content: center;
-    padding: 0;
+  .sidebar .sidebar-section-title {
+    padding: 28px 24px 10px;
   }
 
-  .sidebar-bottom {
-    justify-content: center;
-    padding: 12px;
+  .sidebar .menu {
+    padding: 0 12px;
+  }
+
+  .sidebar .menu-item {
+    justify-content: flex-start;
+    padding: 0 15px;
+  }
+
+  .sidebar .sidebar-bottom {
+    justify-content: flex-start;
+    padding: 17px;
   }
 
   .main-content {
-    margin-left: 70px;
+    width: 100%;
     min-width: 0;
+    margin-left: 0;
   }
 
   .topbar {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: start;
+    justify-content: initial;
     gap: 8px;
+    min-height: auto;
     padding: 14px 10px;
-    min-height: 85px;
+  }
+
+  .hamburger-button {
+    display: inline-flex;
+    grid-column: 1;
+    grid-row: 1;
+    width: 38px;
+    height: 38px;
+    margin-top: 2px;
+  }
+
+  .topbar > div:first-of-type {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
   }
 
   .topbar h1 {
     font-size: 16px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
   }
 
   .topbar p {
     font-size: 10px;
+    line-height: 1.5;
   }
 
   .topbar-right {
+    grid-column: 2;
+    grid-row: 2;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 8px;
+    width: 100%;
     min-width: 0;
-    flex-shrink: 1;
+    padding-top: 8px;
   }
 
   .online-status {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 9px;
+    gap: 7px;
+    max-width: 100%;
+    min-width: 0;
     white-space: normal;
-    line-height: 1.3;
-    max-width: 100px;
+    font-size: 10px;
+    line-height: 1.4;
     flex-shrink: 1;
   }
 
   .online-status span {
-    width: 7px;
-    height: 7px;
-    min-width: 7px;
     flex-shrink: 0;
   }
 
@@ -1290,18 +1364,23 @@ td strong {
     display: none;
   }
 
-  .topbar-right button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 8px;
-    font-size: 10px;
-    white-space: nowrap;
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: rgba(15, 23, 42, 0.45);
+    cursor: pointer;
   }
 
   .content {
-    padding: 18px 12px 30px;
+    width: 100%;
     min-width: 0;
+    padding: 18px 12px 30px;
   }
 
   .welcome-card {
@@ -1324,8 +1403,14 @@ td strong {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .page-title-row {
+    align-items: flex-start;
     flex-direction: column;
+    gap: 15px;
   }
 
   .form-card {
@@ -1338,7 +1423,6 @@ td strong {
   }
 
   .date-fields {
-    display: grid !important;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr) minmax(0, 1fr) !important;
     gap: 5px !important;
   }
@@ -1354,10 +1438,22 @@ td strong {
     padding: 14px;
   }
 
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .pagination-container {
+    align-items: flex-start;
     flex-direction: column;
     gap: 10px;
-    align-items: flex-start;
+    padding: 13px 14px;
+  }
+
+  .pagination-buttons {
+    max-width: 100%;
+    flex-wrap: wrap;
   }
 
   .auth-card {
@@ -1367,12 +1463,18 @@ td strong {
 
 @media (max-width: 480px) {
   .topbar {
-    padding: 12px 7px;
-    gap: 5px;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 6px;
+    padding: 12px 8px;
+  }
+
+  .hamburger-button {
+    width: 34px;
+    height: 34px;
   }
 
   .topbar h1 {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .topbar p {
@@ -1384,20 +1486,13 @@ td strong {
   }
 
   .online-status {
-    font-size: 8px;
     gap: 5px;
-    max-width: 82px;
-  }
-
-  .online-status span {
-    width: 6px;
-    height: 6px;
-    min-width: 6px;
-  }
-
-  .topbar-right button {
-    padding: 0 5px;
+    max-width: 100%;
     font-size: 9px;
+  }
+
+  .content {
+    padding: 18px 10px 28px;
   }
 
   .date-fields {
@@ -1408,5 +1503,35 @@ td strong {
   .date-fields > select {
     padding: 0 3px;
     font-size: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .topbar {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 5px;
+    padding: 10px 7px;
+  }
+
+  .hamburger-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .topbar h1 {
+    font-size: 14px;
+  }
+
+  .topbar-right {
+    gap: 5px;
+  }
+
+  .online-status {
+    font-size: 8px;
+  }
+
+  .content {
+    padding-right: 8px;
+    padding-left: 8px;
   }
 }
