@@ -389,6 +389,11 @@ function Pagination({
 
 function App() {
   const [page, setPage] = useState("dashboard");
+  const [menuOuvert, setMenuOuvert] = useState(false);
+  function naviguerVers(nouvellePage) {
+  setPage(nouvellePage);
+  setMenuOuvert(false);
+}
 
   const [currentUser, setCurrentUser] = useState(() => {
     try {
@@ -1034,7 +1039,7 @@ function App() {
 
   return (
     <div className="application">
-      <aside className="sidebar">
+      <aside className={`sidebar ${menuOuvert ? "sidebar-open" : ""}`}>
         <div
           className="brand"
           style={{
@@ -1069,47 +1074,54 @@ function App() {
 
         <div className="sidebar-section-title">MENU PRINCIPAL</div>
 
-        <nav className="menu">
-          <button
-            className={`menu-item ${page === "dashboard" ? "active" : ""}`}
-            onClick={() => setPage("dashboard")}
-          >
-            <Icon name="dashboard" size={19} />
-            <span>Tableau de bord</span>
-          </button>
+        
+<nav className="menu">
+  <button
+    type="button"
+    className={`menu-item ${page === "dashboard" ? "active" : ""}`}
+    onClick={() => naviguerVers("dashboard")}
+  >
+    <Icon name="dashboard" size={19} />
+    <span>Tableau de bord</span>
+  </button>
 
-          <button
-            className={`menu-item ${page === "employes" ? "active" : ""}`}
-            onClick={() => setPage("employes")}
-          >
-            <Icon name="users" size={19} />
-            <span>Employés</span>
-          </button>
+  <button
+    type="button"
+    className={`menu-item ${page === "employes" ? "active" : ""}`}
+    onClick={() => naviguerVers("employes")}
+  >
+    <Icon name="users" size={19} />
+    <span>Employés</span>
+  </button>
 
-          <button
-            className={`menu-item ${page === "departements" ? "active" : ""}`}
-            onClick={() => setPage("departements")}
-          >
-            <Icon name="building" size={19} />
-            <span>Départements</span>
-          </button>
+  <button
+    type="button"
+    className={`menu-item ${page === "departements" ? "active" : ""}`}
+    onClick={() => naviguerVers("departements")}
+  >
+    <Icon name="building" size={19} />
+    <span>Départements</span>
+  </button>
 
-          <button
-            className={`menu-item ${page === "postes" ? "active" : ""}`}
-            onClick={() => setPage("postes")}
-          >
-            <Icon name="briefcase" size={19} />
-            <span>Postes</span>
-          </button>
+  <button
+    type="button"
+    className={`menu-item ${page === "postes" ? "active" : ""}`}
+    onClick={() => naviguerVers("postes")}
+  >
+    <Icon name="briefcase" size={19} />
+    <span>Postes</span>
+  </button>
 
-          <button
-            className={`menu-item ${page === "about" ? "active" : ""}`}
-            onClick={() => setPage("about")}
-          >
-            <Icon name="building" size={19} />
-            <span>À propos</span>
-          </button>
-        </nav>
+  <button
+    type="button"
+    className={`menu-item ${page === "about" ? "active" : ""}`}
+    onClick={() => naviguerVers("about")}
+  >
+    <Icon name="building" size={19} />
+    <span>À propos</span>
+  </button>
+</nav>
+
 
         <div className="sidebar-bottom">
           <div className="sidebar-user-icon">
@@ -1122,9 +1134,43 @@ function App() {
           </div>
         </div>
       </aside>
+      {menuOuvert && (
+  <button
+    type="button"
+    className="sidebar-overlay"
+    aria-label="Fermer le menu"
+    onClick={() => setMenuOuvert(false)}
+  />
+)}
 
       <main className="main-content">
         <header className="topbar">
+           <button
+    type="button"
+    className="hamburger-button"
+    aria-label={menuOuvert ? "Fermer le menu" : "Ouvrir le menu"}
+    aria-expanded={menuOuvert}
+    onClick={() => setMenuOuvert((ouvert) => !ouvert)}
+  >
+    {menuOuvert ? (
+      <Icon name="close" size={24} />
+    ) : (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      >
+        <path d="M4 6h16" />
+        <path d="M4 12h16" />
+        <path d="M4 18h16" />
+      </svg>
+    )}
+  </button>
+
           <div>
             <div className="breadcrumb">
               Gestion des employés
