@@ -1,35 +1,45 @@
 # Gestion des Employés
 
-## Présentation du projet
+## Description
 
-Gestion des Employés est une application web permettant de gérer les informations des employés d'une entreprise. Elle facilite l'enregistrement, la consultation et l'organisation des données des employés.
+Gestion des Employés est une application web permettant de gérer les informations des employés d'une entreprise. Elle permet d'enregistrer, de consulter, de modifier et de supprimer les informations des employés, des départements et des postes.
 
 ## Technologies utilisées
 
 - **Backend :** Python et Django
 - **Frontend :** React.js et Vite
-- **Base de données :** MySQL / MariaDB
+- **Base de données :** SQLite
 - **Outils :** Visual Studio Code, Git et GitHub
+- **Hébergement :** PythonAnywhere
 
 ## Fonctionnalités principales
 
 - Gestion des employés
 - Gestion des départements
 - Gestion des postes
-- Enregistrement et consultation des informations des employés
+- Enregistrement, consultation, modification et suppression des données
 - Association des employés à un département et à un poste
+- Authentification de l'administrateur
 
 ## Structure du projet
 
 ```text
 gestion_employes/
 ├── backend/
+│   ├── backend/
+│   ├── gestion/
+│   ├── manage.py
+│   ├── requirements.txt
+│   └── db.sqlite3
 ├── frontend/
+│   ├── src/
+│   ├── package.json
+│   └── vite.config.js
 ├── .gitignore
 └── README.md
 ```
 
-## Installation et lancement
+## Installation en local
 
 ### 1. Cloner le projet
 
@@ -40,37 +50,47 @@ cd gestion_employes
 
 ### 2. Lancer le backend Django
 
-Ouvrir un terminal dans le dossier `backend`, activer l'environnement virtuel et installer les dépendances :
+Ouvrir un terminal dans le dossier `backend` :
 
 ```bash
-cd backend
+python -m venv .venv
+```
+
+Sous Windows, activer l'environnement virtuel :
+
+```bat
+.venv\Scripts\activate
+```
+
+Installer les dépendances et appliquer les migrations :
+
+```bash
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
 
-Le backend sera accessible à l'adresse :
+Le backend local est accessible à l'adresse :
 
 http://127.0.0.1:8000/
 
 ### 3. Lancer le frontend React
 
-Ouvrir un deuxième terminal :
+Ouvrir un deuxième terminal dans le dossier `frontend` :
 
 ```bash
-cd frontend
 npm install
 npm run dev
 ```
 
-Le frontend sera accessible à l'adresse indiquée dans le terminal Vite, généralement :
+Ouvrir l'adresse affichée par Vite, généralement :
 
 http://localhost:5173/
 
-## Auteur
+## Application en ligne
 
-Projet réalisé dans le cadre des études en Informatique de Gestion.
+https://maholy.pythonanywhere.com/app/
 
-## Licence
+## Code source
 
-Projet académique.
+https://github.com/rakotoarivonybakoky-cmyk/gestion_employes
